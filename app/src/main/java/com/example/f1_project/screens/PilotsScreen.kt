@@ -25,8 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.example.f1_project.data_class.Pilot
 import androidx.compose.ui.Modifier
 
+
 @Composable
-fun PilotScreen(pilots: List<Pilot>, onCompareClick: (Pilot, Pilot) -> Unit) {
+fun PilotsScreen(pilots: List<Pilot>, onCompareClick: (Pilot, Pilot) -> Unit) {
     val selectedPilots = remember { mutableStateListOf<Pilot>() }
     val showDialog = remember { mutableStateOf(false) }
     val pilotForDetails = remember { mutableStateOf<Pilot?>(null) }

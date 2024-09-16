@@ -27,7 +27,7 @@ fun CompareScreen(pilot1: Pilot, pilot2: Pilot) {
                 contentDescription = "${pilot1.name}'s photo",
                 modifier = Modifier.size(150.dp)
             )
-            Text(text = pilot1.name, style = MaterialTheme.typography.h6)
+            Text(text = pilot1.name, style = MaterialTheme.typography.headlineSmall)
             PilotStatistics(pilot = pilot1)
         }
 
@@ -37,7 +37,7 @@ fun CompareScreen(pilot1: Pilot, pilot2: Pilot) {
                 contentDescription = "${pilot2.name}'s photo",
                 modifier = Modifier.size(150.dp)
             )
-            Text(text = pilot2.name, style = MaterialTheme.typography.h6)
+            Text(text = pilot2.name, style = MaterialTheme.typography.headlineSmall)
             PilotStatistics(pilot = pilot2)
         }
     }
