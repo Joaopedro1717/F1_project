@@ -6,13 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.f1_project.navigation.AppNavGraph
 import com.example.f1_project.ui.theme.F1_projectTheme
@@ -22,14 +18,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MaterialTheme {
-                Surface {
+            // Define um estado para o tema escuro
+            var isDarkTheme by remember { mutableStateOf(false) }
+
+            // Aplica o tema com base no estado do tema escuro
+            F1_projectTheme(darkTheme = isDarkTheme) {
+                Surface(modifier = Modifier.fillMaxSize()) {
                     val navController = rememberNavController()
-                    AppNavGraph(navController = navController)
+
+                    // Passa o estado e a função de troca de tema para a AppNavGraph
+                    AppNavGraph(
+                        navController = navController,
+                        isDarkTheme = isDarkTheme,
+                        onThemeChange = { isDarkTheme = it } // Função para alterar o tema
+                    )
                 }
             }
         }
     }
 }
-
-
