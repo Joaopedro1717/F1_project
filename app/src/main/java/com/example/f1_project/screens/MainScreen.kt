@@ -18,8 +18,7 @@ import androidx.compose.runtime.remember
 
 @Composable
 fun MainScreen(navController: NavController) {
-    // Gerenciamento do estado do ícone selecionado
-    val selectedScreen = remember { mutableStateOf("profile") } // Default para a tela de perfil
+    val selectedScreen = remember { mutableStateOf<String?>(null) }
 
     Scaffold(
         bottomBar = {
@@ -42,7 +41,7 @@ fun MainScreen(navController: NavController) {
                         IconButton(
                             onClick = {
                                 navController.navigate("profile")
-                                selectedScreen.value = "profile" // Atualiza o ícone selecionado
+                                selectedScreen.value = "profile"
                             }) {
                             Icon(
                                 imageVector = Icons.Filled.Person,
@@ -56,7 +55,7 @@ fun MainScreen(navController: NavController) {
                         IconButton(
                             onClick = {
                                 navController.navigate("settings")
-                                selectedScreen.value = "settings" // Atualiza o ícone selecionado
+                                selectedScreen.value = "settings"
                             }) {
                             Icon(
                                 imageVector = Icons.Filled.Settings,
@@ -76,3 +75,4 @@ fun MainScreen(navController: NavController) {
         )
     }
 }
+

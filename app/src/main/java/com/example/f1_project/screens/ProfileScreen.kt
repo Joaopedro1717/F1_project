@@ -15,7 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.f1_project.R // Substitua por sua imagem de perfil no drawable
+import com.example.f1_project.R
 
 @Composable
 fun ProfileScreen() {
@@ -24,9 +24,9 @@ fun ProfileScreen() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Imagem de perfil circular e destacada
+
         Image(
-            painter = painterResource(id = R.drawable.lando_norris), // Coloque sua imagem de perfil aqui
+            painter = painterResource(id = R.drawable.lando_norris),
             contentDescription = "Profile Picture",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -37,7 +37,7 @@ fun ProfileScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Nome do usuário
+
         Text(
             text = "Nome do Usuário",
             style = MaterialTheme.typography.headlineSmall,
@@ -46,9 +46,9 @@ fun ProfileScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Equipe favorita
+
         Text(
-            text = "Equipe Favorita: Red Bull Racing", // Altere para a equipe favorita do usuário
+            text = "Equipe Favorita: Red Bull Racing",
             style = MaterialTheme.typography.bodyMedium,
             color = Color.Gray,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -56,7 +56,7 @@ fun ProfileScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Cards de estatísticas ou informações adicionais (opcional)
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -68,7 +68,7 @@ fun ProfileScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Biografia ou descrição do perfil
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()

@@ -13,12 +13,12 @@ import com.example.f1_project.screens.SettingsScreen
 @Composable
 fun AppNavGraph(
     navController: NavHostController,
-    isDarkTheme: Boolean, // Estado do tema passado para navegação
-    onThemeChange: (Boolean) -> Unit // Função para alterar o tema
+    isDarkTheme: Boolean,
+    onThemeChange: (Boolean) -> Unit
 ) {
     NavHost(navController = navController, startDestination = "pilots") {
         composable("pilots") {
-            // Chama a MainScreen que já inclui a PilotsScreen e a BottomBar
+
             MainScreen(navController = navController)
         }
         composable("details/{pilotName}") { backStackEntry ->
@@ -29,11 +29,11 @@ fun AppNavGraph(
             }
         }
         composable("profile") {
-            // Chama a tela de perfil
+
             ProfileScreen()
         }
         composable("settings") {
-            // Passa o estado do tema e a função para alterar o tema
+
             SettingsScreen(isDarkTheme = isDarkTheme, onThemeChange = onThemeChange)
         }
     }

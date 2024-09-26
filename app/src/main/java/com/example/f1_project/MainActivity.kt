@@ -18,19 +18,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // Define um estado para o tema escuro
+
             var isDarkTheme by remember { mutableStateOf(false) }
 
-            // Aplica o tema com base no estado do tema escuro
             F1_projectTheme(darkTheme = isDarkTheme) {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     val navController = rememberNavController()
 
-                    // Passa o estado e a função de troca de tema para a AppNavGraph
                     AppNavGraph(
                         navController = navController,
                         isDarkTheme = isDarkTheme,
-                        onThemeChange = { isDarkTheme = it } // Função para alterar o tema
+                        onThemeChange = { isDarkTheme = it }
                     )
                 }
             }

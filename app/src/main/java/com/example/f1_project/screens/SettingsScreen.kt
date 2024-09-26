@@ -54,7 +54,7 @@ fun SettingsScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Texto e ícone
+
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Filled.Brightness6,
@@ -65,7 +65,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(text = "Tema Escuro", style = MaterialTheme.typography.bodyLarge)
                 }
-                // Switch para alternar o tema
+
                 Switch(
                     checked = isDarkTheme,
                     onCheckedChange = { onThemeChange(it) }

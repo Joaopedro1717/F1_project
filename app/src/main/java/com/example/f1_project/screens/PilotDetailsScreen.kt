@@ -31,7 +31,7 @@ fun PilotDetailsScreen(pilot: Pilot) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Parte superior com a imagem
+
         Image(
             painter = painterResource(id = pilot.imageRes),
             contentDescription = "${pilot.name}'s photo",
@@ -44,7 +44,6 @@ fun PilotDetailsScreen(pilot: Pilot) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Nome e equipe do piloto
         Text(
             text = pilot.name,
             style = MaterialTheme.typography.headlineSmall,
@@ -58,7 +57,6 @@ fun PilotDetailsScreen(pilot: Pilot) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Cards de informações (Vitórias, Títulos, Nacionalidade)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -82,7 +80,6 @@ fun PilotDetailsScreen(pilot: Pilot) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Seção de biografia
         Column(
             modifier = Modifier
                 .fillMaxWidth()

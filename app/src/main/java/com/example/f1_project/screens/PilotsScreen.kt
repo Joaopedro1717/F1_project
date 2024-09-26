@@ -24,7 +24,7 @@ import com.example.f1_project.data_class.Pilot
 fun PilotsScreen(pilots: List<Pilot>, onDetailsClick: (Pilot) -> Unit, modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = modifier.fillMaxSize() // Use o modifier recebido
+        modifier = modifier.fillMaxSize()
     ) {
         items(pilots) { pilot ->
             PilotCard(
@@ -34,8 +34,6 @@ fun PilotsScreen(pilots: List<Pilot>, onDetailsClick: (Pilot) -> Unit, modifier:
         }
     }
 }
-
-
 
 @Composable
 fun PilotCard(pilot: Pilot, onDetailsClick: () -> Unit) {
