@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.f1_project.data_class.Pilot
+import com.example.f1_project.data.models.Pilot
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 

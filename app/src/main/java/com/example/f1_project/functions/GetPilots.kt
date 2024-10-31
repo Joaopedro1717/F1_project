@@ -1,7 +1,7 @@
 package com.example.f1_project.functions
 
 import com.example.f1_project.R
-import com.example.f1_project.data_class.Pilot
+import com.example.f1_project.data.models.Pilot
 
 fun getPilots(): List<Pilot> {
     return listOf(
