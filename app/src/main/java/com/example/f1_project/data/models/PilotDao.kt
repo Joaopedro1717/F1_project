@@ -25,7 +25,6 @@ interface PilotDao {
     @Update
     suspend fun updatePilot(pilot: Pilot)
 
-    //Update e Insert
     @Upsert
     suspend fun upsertPilot(pilot: Pilot)
 
