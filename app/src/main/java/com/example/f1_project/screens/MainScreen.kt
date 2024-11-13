@@ -3,21 +3,26 @@ package com.example.f1_project.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.f1_project.functions.getPilots
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import com.example.f1_project.data.models.Pilot
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(
+    navController: NavController,
+    pilots: List<Pilot>,
+    onAddPilot: (Pilot) -> Unit
+) {
     val selectedScreen = remember { mutableStateOf<String?>(null) }
 
     Scaffold(
@@ -66,13 +71,22 @@ fun MainScreen(navController: NavController) {
                     }
                 }
             }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navController.navigate("addPilot") },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Pilot",
+                    tint = Color.White)
+            }
         }
     ) { paddingValues ->
         PilotsScreen(
-            pilots = getPilots(),
+            pilots = pilots,
             onDetailsClick = { pilot -> navController.navigate("details/${pilot.name}") },
             modifier = Modifier.padding(paddingValues)
         )
     }
 }
-

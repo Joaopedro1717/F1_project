@@ -69,7 +69,7 @@ fun PilotDetailsScreen(pilot: Pilot) {
             InfoCard(
                 icon = Icons.Filled.Flag,
                 label = "Nacionalidade",
-                value = pilot.nacionality
+                value = pilot.nationality
             )
             InfoCard(
                 icon = Icons.Filled.EmojiEvents,

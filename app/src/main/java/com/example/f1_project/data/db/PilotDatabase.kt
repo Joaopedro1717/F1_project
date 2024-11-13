@@ -4,23 +4,26 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.f1_project.data.models.Converters // Corrija a importação aqui
 import com.example.f1_project.data.models.Pilot
 import com.example.f1_project.data.models.PilotDao
 
-@Database(entities = [Pilot::class], version = 1, exportSchema = false)
-abstract class PilotDB : RoomDatabase() {
+@Database(entities = [Pilot::class], version = 1)
+@TypeConverters(Converters::class) // Certifique-se de que a classe Converters seja corretamente referenciada
+abstract class PilotDatabase : RoomDatabase() {
     abstract fun pilotDao(): PilotDao
 
     companion object {
         @Volatile
-        private var INSTANCE: PilotDB? = null
+        private var INSTANCE: PilotDatabase? = null
 
-        fun getDatabase(context: Context): PilotDB {
+        fun getDatabase(context: Context): PilotDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    PilotDB::class.java,
-                    "f1_database.db"
+                    PilotDatabase::class.java,
+                    "pilot_database"
                 ).build()
                 INSTANCE = instance
                 instance
