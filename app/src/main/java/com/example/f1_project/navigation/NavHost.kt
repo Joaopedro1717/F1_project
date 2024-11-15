@@ -20,17 +20,17 @@ fun AppNavGraph(
     navController: NavHostController,
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
-    onAddPilot: (Pilot) -> Unit // Corrigido para uma função normal
+    onAddPilot: (Pilot) -> Unit
 ) {
-    val pilotViewModel: PilotViewModel = viewModel() // Obtém o ViewModel
-    val pilots = pilotViewModel.pilots.observeAsState(listOf()).value // Observa a lista de pilotos
+    val pilotViewModel: PilotViewModel = viewModel()
+    val pilots = pilotViewModel.pilots.observeAsState(listOf()).value
 
     NavHost(navController = navController, startDestination = "pilots") {
         composable("pilots") {
             MainScreen(
                 navController = navController,
-                pilots = pilots, // Passa a lista de pilotos do ViewModel
-                onAddPilot = onAddPilot // Passa a função onAddPilot normalmente
+                pilots = pilots,
+                onAddPilot = onAddPilot
             )
         }
         composable("details/{pilotName}") { backStackEntry ->
@@ -52,7 +52,7 @@ fun AppNavGraph(
         composable("addPilot") {
             AddPilotScreen(
                 navController = navController,
-                onAddPilot = onAddPilot // Passa a função normalmente
+                onAddPilot = onAddPilot
             )
         }
         composable("editPilot/{pilotId}") { backStackEntry ->
@@ -62,13 +62,15 @@ fun AppNavGraph(
                 EditPilotScreen(
                     pilot = it,
                     onSave = { updatedPilot ->
-                        pilotViewModel.updatePilot(updatedPilot) // Aqui a função de atualização
-                        navController.popBackStack() // Volta para a tela anterior
+                        pilotViewModel.updatePilot(updatedPilot)
+                        navController.popBackStack()
+                    },
+                    onDelete = { pilotToDelete ->
+                        pilotViewModel.deletePilot(pilotToDelete)
+                        navController.popBackStack()
                     }
                 )
             }
         }
-
     }
 }
-

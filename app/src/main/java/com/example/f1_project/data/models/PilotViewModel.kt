@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 class PilotViewModel(application: Application) : AndroidViewModel(application) {
     private val pilotRepository = PilotRepository(application)
 
-    // Converte Flow<List<Pilot>> para LiveData<List<Pilot>> usando asLiveData()
     val pilots: LiveData<List<Pilot>> = pilotRepository.getAllPilots().asLiveData()
 
     fun addPilot(pilot: Pilot) {
@@ -18,15 +17,23 @@ class PilotViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 pilotRepository.insertPilot(pilot)
             } catch (e: Exception) {
-                // Tratar erro aqui, como por exemplo mostrar uma mensagem de erro
+                // Tratar erro aqui
             }
         }
     }
 
-        fun updatePilot(pilot: Pilot) {
-            viewModelScope.launch {
-                pilotRepository.updatePilot(pilot)
-            }
+    fun updatePilot(pilot: Pilot) {
+        viewModelScope.launch {
+            pilotRepository.updatePilot(pilot)
         }
     }
+
+    // Corrigido: deletePilot agora está dentro do escopo da classe
+    fun deletePilot(pilot: Pilot) {
+        viewModelScope.launch {
+            pilotRepository.deletePilot(pilot)
+        }
+    }
+}
+
 
