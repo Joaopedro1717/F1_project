@@ -7,21 +7,20 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.f1_project.data.models.Pilot
 
 @Composable
 fun MainScreen(
     navController: NavController,
-    pilots: List<Pilot>,
-    onAddPilot: (Pilot) -> Unit
+    pilots: List<Pilot>, // Agora recebendo a lista de pilotos
+    onAddPilot: (Pilot) -> Unit // Recebendo a função de adicionar piloto
 ) {
     val selectedScreen = remember { mutableStateOf<String?>(null) }
 
@@ -76,13 +75,13 @@ fun MainScreen(
             FloatingActionButton(
                 onClick = { navController.navigate("addPilot") },
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.primary
+                contentColor = Color.White
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Pilot",
-                    tint = Color.White)
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Pilot")
             }
         }
     ) { paddingValues ->
+        // Exibindo a lista de pilotos
         PilotsScreen(
             pilots = pilots,
             onDetailsClick = { pilot -> navController.navigate("details/${pilot.name}") },

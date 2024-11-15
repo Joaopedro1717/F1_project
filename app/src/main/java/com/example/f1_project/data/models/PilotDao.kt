@@ -1,22 +1,20 @@
-package com.example.f1_project.data.models
+package com.example.f1_project.data.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
+import com.example.f1_project.data.models.Pilot
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PilotDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPilot(pilot: Pilot)
 
-    @Query("SELECT * FROM pilots")  // Corrigido o nome da tabela de "pilot" para "pilots"
-    suspend fun getAllPilots(): List<Pilot>
+    @Query("SELECT * FROM pilots")
+    fun getAllPilots(): Flow<List<Pilot>> // Retorna Flow para observar as mudanças
 
-    @Query("SELECT * FROM pilots WHERE id = :id")  // Corrigido o nome da tabela de "pilot" para "pilots"
-    suspend fun getPilotById(id: Long): Pilot?  // Corrigido para Long, se você alterar o ID para Long
+    @Query("SELECT * FROM pilots WHERE id = :id")
+    suspend fun getPilotById(id: Long): Pilot?
 
     @Update
     suspend fun updatePilot(pilot: Pilot)

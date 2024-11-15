@@ -1,7 +1,10 @@
 package com.example.f1_project.data.models
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import com.example.f1_project.data.db.PilotDao
 import com.example.f1_project.data.db.PilotDatabase
+import kotlinx.coroutines.flow.Flow
 
 class PilotRepository(application: Application) {
 
@@ -13,7 +16,7 @@ class PilotRepository(application: Application) {
     }
 
     // Função para obter todos os pilotos
-    suspend fun getAllPilots(): List<Pilot> {
+    fun getAllPilots(): Flow<List<Pilot>> {
         return pilotDao.getAllPilots()
     }
 

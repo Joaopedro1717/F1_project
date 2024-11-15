@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.f1_project.data.models.Converters // Corrija a importação aqui
 import com.example.f1_project.data.models.Pilot
-import com.example.f1_project.data.models.PilotDao
 
 @Database(entities = [Pilot::class], version = 1)
 @TypeConverters(Converters::class) // Certifique-se de que a classe Converters seja corretamente referenciada
