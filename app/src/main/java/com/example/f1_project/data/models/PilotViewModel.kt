@@ -22,4 +22,11 @@ class PilotViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-}
+
+        fun updatePilot(pilot: Pilot) {
+            viewModelScope.launch {
+                pilotRepository.updatePilot(pilot)
+            }
+        }
+    }
+

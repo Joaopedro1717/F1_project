@@ -13,6 +13,7 @@ import com.example.f1_project.screens.SettingsScreen
 import com.example.f1_project.screens.AddPilotScreen
 import com.example.f1_project.data.models.Pilot
 import com.example.f1_project.data.models.PilotViewModel
+import com.example.f1_project.screens.EditPilotScreen
 
 @Composable
 fun AppNavGraph(
@@ -54,6 +55,20 @@ fun AppNavGraph(
                 onAddPilot = onAddPilot // Passa a função normalmente
             )
         }
+        composable("editPilot/{pilotId}") { backStackEntry ->
+            val pilotId = backStackEntry.arguments?.getString("pilotId")
+            val pilot = pilots.find { it.id.toString() == pilotId }
+            pilot?.let {
+                EditPilotScreen(
+                    pilot = it,
+                    onSave = { updatedPilot ->
+                        pilotViewModel.updatePilot(updatedPilot) // Aqui a função de atualização
+                        navController.popBackStack() // Volta para a tela anterior
+                    }
+                )
+            }
+        }
+
     }
 }
 

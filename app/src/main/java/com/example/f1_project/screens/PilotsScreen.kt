@@ -1,6 +1,7 @@
 package com.example.f1_project.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +22,12 @@ import androidx.compose.ui.unit.dp
 import com.example.f1_project.data.models.Pilot
 
 @Composable
-fun PilotsScreen(pilots: List<Pilot>, onDetailsClick: (Pilot) -> Unit, modifier: Modifier = Modifier) {
+fun PilotsScreen(
+    pilots: List<Pilot>,
+    onDetailsClick: (Pilot) -> Unit,
+    onEditClick: (Pilot) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = modifier.fillMaxSize()
@@ -29,17 +35,23 @@ fun PilotsScreen(pilots: List<Pilot>, onDetailsClick: (Pilot) -> Unit, modifier:
         items(pilots) { pilot ->
             PilotCard(
                 pilot = pilot,
-                onDetailsClick = { onDetailsClick(pilot) }
+                onDetailsClick = { onDetailsClick(pilot) },
+                onEditClick = { onEditClick(pilot) }
             )
         }
     }
 }
 
 @Composable
-fun PilotCard(pilot: Pilot, onDetailsClick: () -> Unit) {
+fun PilotCard(
+    pilot: Pilot,
+    onDetailsClick: () -> Unit,
+    onEditClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(8.dp)
+            .clickable { onEditClick() }
     ) {
         Column(
             modifier = Modifier
@@ -54,9 +66,13 @@ fun PilotCard(pilot: Pilot, onDetailsClick: () -> Unit) {
             )
             Text(text = pilot.name, style = MaterialTheme.typography.headlineSmall)
             Text(text = pilot.team, style = MaterialTheme.typography.bodyMedium)
-            Button(onClick = onDetailsClick) {
+            Button(
+                onClick = onDetailsClick,
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
                 Text(text = "Ver detalhes")
             }
         }
     }
 }
+

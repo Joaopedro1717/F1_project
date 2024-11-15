@@ -16,6 +16,7 @@ fun AddPilotScreen(navController: NavController, onAddPilot: (Pilot) -> Unit) {
     var nationality by remember { mutableStateOf("") }
     var age by remember { mutableStateOf("") }
     var grandPrixWins by remember { mutableStateOf("") }
+    var polePositions by remember { mutableStateOf("") }
     var worldTitles by remember { mutableStateOf("") }
 
     Column(
@@ -81,7 +82,7 @@ fun AddPilotScreen(navController: NavController, onAddPilot: (Pilot) -> Unit) {
                     previousTeams = emptyList(),
                     grandPrixWins = grandPrixWins.toIntOrNull() ?: 0,
                     worldTitles = worldTitles.toIntOrNull() ?: 0,
-                    polePositions = 0,
+                    polePositions = polePositions.toIntOrNull() ?: 0,
                     imageRes = R.drawable.lewis_hamilton// Defina uma imagem padrão ou deixe vazia para customizar depois
                 )
                 onAddPilot(newPilot)

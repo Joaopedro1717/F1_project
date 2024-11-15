@@ -1,6 +1,9 @@
 package com.example.f1_project.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -14,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.f1_project.data.models.Pilot
 
 @Composable
@@ -81,11 +85,14 @@ fun MainScreen(
             }
         }
     ) { paddingValues ->
-        // Exibindo a lista de pilotos
         PilotsScreen(
             pilots = pilots,
             onDetailsClick = { pilot -> navController.navigate("details/${pilot.name}") },
+            onEditClick = { pilot -> navController.navigate("editPilot/${pilot.id}") },
             modifier = Modifier.padding(paddingValues)
         )
     }
 }
+
+
+
