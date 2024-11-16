@@ -1,5 +1,6 @@
 package com.example.f1_project.data.models
 
+import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -14,6 +15,6 @@ data class Pilot(
     val grandPrixWins: Int,
     val worldTitles: Int,
     val polePositions: Int,
-    val imageRes: Int
+    @DrawableRes val imageRes: Int
 )
 

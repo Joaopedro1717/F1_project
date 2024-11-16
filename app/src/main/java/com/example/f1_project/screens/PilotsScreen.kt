@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.f1_project.R
 import com.example.f1_project.data.models.Pilot
 
 @Composable
@@ -60,7 +61,7 @@ fun PilotCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = pilot.imageRes),
+                painter = painterResource(id = R.drawable.lewis_hamilton),
                 contentDescription = "${pilot.name}'s photo",
                 modifier = Modifier.size(100.dp)
             )

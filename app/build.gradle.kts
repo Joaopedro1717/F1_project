@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -78,5 +80,9 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.9")
     // ou a versão mais recente
     implementation ("androidx.room:room-ktx:2.$room_version")
-// Adicione esta li
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.1.1")
+
 }
