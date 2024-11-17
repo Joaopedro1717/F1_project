@@ -38,6 +38,15 @@ class PilotViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 pilotRepository.upsertPilot(pilot)
+
+                firestore.collection("teste")
+                    .add(pilot)
+                    .addOnSuccessListener {
+                        println("Pilot added to Firestore with ID: ${it.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        e.printStackTrace()
+                    }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
