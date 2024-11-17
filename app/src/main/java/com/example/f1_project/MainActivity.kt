@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     isDarkTheme = isDarkTheme.value,
                     onThemeChange = { isDarkTheme.value = it },
-                    onAddPilot = onAddPilot // Passa a função normal
+                    onAddPilot =  { pilot -> pilotViewModel.addPilot(pilot) }// Passa a função normalonAddPilot }// Passa a função normal
                 )
             }
         }
