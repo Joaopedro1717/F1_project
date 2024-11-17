@@ -1,28 +1,17 @@
 package com.example.f1_project.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Button
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.f1_project.data.models.Pilot
 
@@ -36,6 +25,9 @@ fun EditPilotScreen(
     var name by remember { mutableStateOf(pilot.name) }
     var team by remember { mutableStateOf(pilot.team) }
     var nationality by remember { mutableStateOf(pilot.nationality) }
+    var age by remember { mutableStateOf(pilot.age.toString()) }
+    var grandPrixWins by remember { mutableStateOf(pilot.grandPrixWins.toString()) }
+    var worldTitles by remember { mutableStateOf(pilot.worldTitles.toString()) }
 
     Scaffold(
         floatingActionButton = {
@@ -52,7 +44,9 @@ fun EditPilotScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState()) // Permite rolagem em telas menores
         ) {
+            // Campos de edição
             TextField(
                 value = name,
                 onValueChange = { name = it },
@@ -73,10 +67,43 @@ fun EditPilotScreen(
                 label = { Text("País") },
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = age,
+                onValueChange = { if (it.toIntOrNull() != null || it.isEmpty()) age = it },
+                label = { Text("Idade") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = grandPrixWins,
+                onValueChange = { if (it.toIntOrNull() != null || it.isEmpty()) grandPrixWins = it },
+                label = { Text("Vitórias em GP") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = worldTitles,
+                onValueChange = { if (it.toIntOrNull() != null || it.isEmpty()) worldTitles = it },
+                label = { Text("Títulos Mundiais") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth()
+            )
             Spacer(modifier = Modifier.height(16.dp))
+
+            // Botão de salvar
             Button(
                 onClick = {
-                    val updatedPilot = pilot.copy(name = name, team = team, nationality = nationality)
+                    val updatedPilot = pilot.copy(
+                        name = name,
+                        team = team,
+                        nationality = nationality,
+                        age = age.toIntOrNull() ?: pilot.age,
+                        grandPrixWins = grandPrixWins.toIntOrNull() ?: pilot.grandPrixWins,
+                        worldTitles = worldTitles.toIntOrNull() ?: pilot.worldTitles
+                    )
                     onSave(updatedPilot) // Salva as alterações do piloto
                 },
                 modifier = Modifier.align(Alignment.End)
@@ -86,4 +113,3 @@ fun EditPilotScreen(
         }
     }
 }
-

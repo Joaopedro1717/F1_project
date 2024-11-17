@@ -55,9 +55,39 @@ class PilotViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updatePilot(pilot: Pilot) {
         viewModelScope.launch {
-            pilotRepository.updatePilot(pilot)
+            try {
+                // Atualiza o banco de dados local
+                pilotRepository.updatePilot(pilot)
+
+                // Atualiza o Firestore
+                val query = firestore.collection("teste")
+                    .whereEqualTo("name", pilot.name) // Filtra pelo nome ou outro campo único
+                    .get()
+
+                query.addOnSuccessListener { snapshot ->
+                    if (!snapshot.isEmpty) {
+                        val docId = snapshot.documents.first().id
+                        firestore.collection("teste")
+                            .document(docId)
+                            .set(pilot) // Substitui o documento no Firestore
+                            .addOnSuccessListener {
+                                println("Pilot successfully updated in Firestore")
+                            }
+                            .addOnFailureListener { e ->
+                                e.printStackTrace()
+                            }
+                    } else {
+                        println("No matching pilot found in Firestore for update")
+                    }
+                }.addOnFailureListener { e ->
+                    e.printStackTrace()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
+
 
     fun deletePilot(pilot: Pilot) {
         viewModelScope.launch {
