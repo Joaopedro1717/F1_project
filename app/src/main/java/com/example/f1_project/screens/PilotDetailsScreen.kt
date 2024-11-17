@@ -20,8 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.f1_project.data.models.Pilot
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-
-
+import com.example.f1_project.R
 
 
 @Composable
@@ -33,7 +32,7 @@ fun PilotDetailsScreen(pilot: Pilot) {
     ) {
 
         Image(
-            painter = painterResource(id = pilot.imageRes),
+            painter = painterResource(id = R.drawable.lewis_hamilton),
             contentDescription = "${pilot.name}'s photo",
             contentScale = ContentScale.Crop,
             modifier = Modifier

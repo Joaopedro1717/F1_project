@@ -11,7 +11,13 @@ interface PilotDao {
     suspend fun insertPilot(pilot: Pilot)
 
     @Query("SELECT * FROM pilots")
-    fun getAllPilots(): Flow<List<Pilot>> // Retorna Flow para observar as mudanças
+    fun getAllPilots(): Flow<List<Pilot>>
+
+    @Query("SELECT * FROM pilots")
+    suspend fun getAllPilotsOnce(): List<Pilot> // Obtem pilotos sem Flow
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(pilots: List<Pilot>)
 
     @Query("SELECT * FROM pilots WHERE id = :id")
     suspend fun getPilotById(id: Long): Pilot?
@@ -22,4 +28,5 @@ interface PilotDao {
     @Delete
     suspend fun deletePilot(pilot: Pilot)
 }
+
 

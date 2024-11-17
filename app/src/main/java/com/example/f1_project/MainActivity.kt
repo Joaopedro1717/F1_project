@@ -12,10 +12,13 @@ import com.example.f1_project.data.models.Pilot
 import com.example.f1_project.data.models.PilotViewModel
 import com.example.f1_project.navigation.AppNavGraph
 import com.example.f1_project.ui.theme.F1ProjectTheme
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
             F1ProjectTheme {
                 val navController = rememberNavController()
@@ -25,6 +28,12 @@ class MainActivity : ComponentActivity() {
 
                 // Criação do viewModel dentro do contexto composable
                 val pilotViewModel: PilotViewModel = viewModel()
+
+                //Sincroniza dados do Firestore com o ViewModel
+                pilotViewModel.syncWithFirestore()
+
+                // Inicia o listener para Firestore
+                pilotViewModel.startFirestoreListener()
 
                 // Passa a função onAddPilot que usa o viewModel
                 val onAddPilot: (Pilot) -> Unit = { pilot ->
