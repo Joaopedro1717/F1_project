@@ -91,9 +91,35 @@ class PilotViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deletePilot(pilot: Pilot) {
         viewModelScope.launch {
+            // Exclui do banco de dados local
             pilotRepository.deletePilot(pilot)
+
+            // Exclui do Firestore
+            val query = firestore.collection("teste")
+                .whereEqualTo("name", pilot.name) // Pode ser outro campo único, como 'id'
+                .get()
+
+            query.addOnSuccessListener { snapshot ->
+                if (!snapshot.isEmpty) {
+                    val docId = snapshot.documents.first().id
+                    firestore.collection("teste")
+                        .document(docId)
+                        .delete() // Deleta o documento do Firestore
+                        .addOnSuccessListener {
+                            println("Pilot successfully deleted from Firestore")
+                        }
+                        .addOnFailureListener { e ->
+                            e.printStackTrace()
+                        }
+                } else {
+                    println("No matching pilot found in Firestore for deletion")
+                }
+            }.addOnFailureListener { e ->
+                e.printStackTrace()
+            }
         }
     }
+
 
     fun startFirestoreListener() {
         if (isFirestoreListenerActive) return // Evita múltiplas inscrições
